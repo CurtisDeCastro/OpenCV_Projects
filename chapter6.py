@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-img = cv2.imread("/Users/curtiscastro/PycharmProjects/OpenCV_lesson_1/Resources/Fire.jpg")
+img = cv2.imread("../Resources/Fire.jpg")
 
 def stackImages(scale,imgArray):
     rows = len(imgArray)
