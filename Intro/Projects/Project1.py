@@ -47,7 +47,9 @@ def getContours(img):
             x, y, w, h = cv2.boundingRect(approx)
     return x+w//2,y
 
-
+def drawOnCanvas(myPoints,myColorValues):
+    for point in myPoints:
+        cv2.circle(imgResult,(point[0],point[1]),10,myColorValues[point[2]],cv2.FILLED)
 
 while True:
     success, img = cap.read()
