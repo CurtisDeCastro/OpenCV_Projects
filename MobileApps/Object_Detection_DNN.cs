@@ -22,7 +22,7 @@ namespace OpenCVForUnityExample
     public class Object_Detection_DNN : MonoBehaviour
     {
 
-        public ResolutionPreset requestedResolution = ResolutionPreset._640x480;
+        public ResolutionPreset requestedResolution = ResolutionPreset._480x640;
         public FPSPreset requestedFPS = FPSPreset._30;
         public Toggle rotate90DegreeToggle;
         public Toggle flipVerticalToggle;
@@ -70,10 +70,8 @@ namespace OpenCVForUnityExample
             if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
             {
                 RectTransform rt = inputImage.GetComponent<RectTransform>();
-                //rt.sizeDelta = new Vector2(720, 1280);
-                //rt.localScale = new Vector3(1.6f, 1.6f, 1f);
-                rt.sizeDelta = new Vector2(640, 480);
-                rt.localScale = new Vector3(3.5f, 3.5f, 1.725f);
+                rt.sizeDelta = new Vector2(480, 640);
+                rt.localScale = new Vector3(2.6f, 2.6f, 1.3f);
 
             }
 
@@ -219,6 +217,7 @@ namespace OpenCVForUnityExample
         {
             _50x50 = 0,
             _640x480,
+            _480x640,
             _1280x720,
             _1920x1080,
             _9999x9999,
@@ -234,6 +233,10 @@ namespace OpenCVForUnityExample
                 case ResolutionPreset._640x480:
                     width = 640;
                     height = 480;
+                    break;
+                case ResolutionPreset._480x640:
+                    width = 480;
+                    height = 640;
                     break;
                 case ResolutionPreset._1280x720:
                     width = 1280;
@@ -532,24 +535,51 @@ namespace OpenCVForUnityExample
 
         protected virtual void drawPred(int classId, float conf, double left, double top, double right, double bottom, Mat frame)
         {
-            Imgproc.rectangle(frame, new Point(left, top), new Point(right, bottom), new Scalar(0, 255, 0, 255), 2);
+            // edit boundingBox below
+            print(classId + "= classId");
 
-            string label = conf.ToString();
-            if (classNames != null && classNames.Count != 0)
+            if(classId == 0 && conf > .45)
             {
-                if (classId < (int)classNames.Count)
+                Imgproc.rectangle(frame, new Point(left, top), new Point(right, bottom), new Scalar(0, 255, 0, 255), 2);
+
+                string label = conf.ToString();
+                if (classNames != null && classNames.Count != 0)
                 {
-                    label = classNames[classId] + ": " + label;
+                    if (classId < (int)classNames.Count)
+                    {
+                        label = "kill " + classNames[classId] + " \n Confidence: " + label;
+                    }
                 }
+
+                int[] baseLine = new int[1];
+                Size labelSize = Imgproc.getTextSize(label, Imgproc.FONT_HERSHEY_SIMPLEX, 0.5, 1, baseLine);
+
+                top = Mathf.Max((float)top, (float)labelSize.height);
+                Imgproc.rectangle(frame, new Point(left, top - labelSize.height),
+                    new Point(left + labelSize.width, top + baseLine[0]), Scalar.all(255), Core.FILLED);
+                Imgproc.putText(frame, label, new Point(left, top), Imgproc.FONT_HERSHEY_SIMPLEX, 0.5, new Scalar(0, 0, 0, 255));
+            } else
+            {
+                Imgproc.rectangle(frame, new Point(left, top), new Point(right, bottom), new Scalar(255, 0, 0, 255), 2);
+
+                string label = conf.ToString();
+                if (classNames != null && classNames.Count != 0)
+                {
+                    if (classId < (int)classNames.Count)
+                    {
+                        label = classNames[classId] + " is safe...";
+                    }
+                }
+
+                int[] baseLine = new int[1];
+                Size labelSize = Imgproc.getTextSize(label, Imgproc.FONT_HERSHEY_SIMPLEX, 0.5, 1, baseLine);
+
+                top = Mathf.Max((float)top, (float)labelSize.height);
+                Imgproc.rectangle(frame, new Point(left, top - labelSize.height),
+                    new Point(left + labelSize.width, top + baseLine[0]), Scalar.all(255), Core.FILLED);
+                Imgproc.putText(frame, label, new Point(left, top), Imgproc.FONT_HERSHEY_SIMPLEX, 0.5, new Scalar(0, 0, 0, 255));
             }
 
-            int[] baseLine = new int[1];
-            Size labelSize = Imgproc.getTextSize(label, Imgproc.FONT_HERSHEY_SIMPLEX, 0.5, 1, baseLine);
-
-            top = Mathf.Max((float)top, (float)labelSize.height);
-            Imgproc.rectangle(frame, new Point(left, top - labelSize.height),
-                new Point(left + labelSize.width, top + baseLine[0]), Scalar.all(255), Core.FILLED);
-            Imgproc.putText(frame, label, new Point(left, top), Imgproc.FONT_HERSHEY_SIMPLEX, 0.5, new Scalar(0, 0, 0, 255));
         }
 
         protected virtual List<string> getOutputsNames(Net net)
