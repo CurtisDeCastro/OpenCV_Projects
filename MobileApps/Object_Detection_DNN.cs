@@ -22,6 +22,16 @@ namespace OpenCVForUnityExample
     [RequireComponent(typeof(Image))]
     public class Object_Detection_DNN : MonoBehaviour
     {
+        Image image;
+        void Awake()
+        {
+            image = GetComponent<Image>();
+        }
+
+        public void ChangeColor(Color col)
+        {
+            image.color = col;
+        }
 
         public ResolutionPreset requestedResolution = ResolutionPreset._480x640;
         public FPSPreset requestedFPS = FPSPreset._30;
@@ -41,6 +51,7 @@ namespace OpenCVForUnityExample
         public GameObject Button_Infrastructure;
 
         public RawImage inputImage;
+        public RawImage inputImageGray;
 
         public string model;
         public string config;
