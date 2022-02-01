@@ -50,8 +50,17 @@ namespace OpenCVForUnityExample
         public GameObject Button_Weapons;
         public GameObject Button_Infrastructure;
 
+        public Color32 clrWhite = new Color32(255, 255, 255, 255);
+        public Color32 clrGreen = new Color32(39, 253, 91, 255);
+        public Color32 clrRed = new Color32(255, 82, 72, 255);
+        public Color32 clrBlue = new Color32(0, 217, 255, 255);
+        public Color32 clrOrange = new Color32(255, 189, 89, 255);
+        public Color32 clrYellow = new Color32(255, 240, 42, 255);
+        public Color32 clrPurple = new Color32(193, 15, 255, 255);
+        public Color32 clrAqua = new Color32(0, 194, 203, 255);
+
         public RawImage inputImage;
-        public RawImage inputImageGray;
+
 
         public string model;
         public string config;
@@ -76,10 +85,6 @@ namespace OpenCVForUnityExample
         public bool detectFurniture = false;
         public bool detectPersonalItems = false;
 
-
-
-
-
         protected Mat bgrMat;
         protected Net net;
 
@@ -103,12 +108,12 @@ namespace OpenCVForUnityExample
             if (detectPeople)
             {
                 print("green");
-                buttonPeople.GetComponent<Image>().color = new Color32(0, 255, 0, 255);
+                buttonPeople.GetComponent<Image>().color = clrGreen;
             }
             else
             {
                 print("white");
-                buttonPeople.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                buttonPeople.GetComponent<Image>().color = clrWhite;
             };
         }
         public void onClickAnimals()
@@ -118,12 +123,12 @@ namespace OpenCVForUnityExample
             if (detectAnimals)
             {
                 print("green");
-                buttonAnimals.GetComponent<Image>().color = new Color32(0, 255, 0, 255);
+                buttonAnimals.GetComponent<Image>().color = clrBlue;
             }
             else
             {
                 print("white");
-                buttonAnimals.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                buttonAnimals.GetComponent<Image>().color = clrWhite;
             };
         }
         public void onClickTransport()
@@ -133,12 +138,12 @@ namespace OpenCVForUnityExample
             if (detectTransport)
             {
                 print("green");
-                buttonTransport.GetComponent<Image>().color = new Color32(0, 255, 0, 255);
+                buttonTransport.GetComponent<Image>().color = clrOrange;
             }
             else
             {
                 print("white");
-                buttonTransport.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                buttonTransport.GetComponent<Image>().color = clrWhite;
             };
 
         }
@@ -149,12 +154,12 @@ namespace OpenCVForUnityExample
             if (detectFood)
             {
                 print("green");
-                buttonFood.GetComponent<Image>().color = new Color32(0, 255, 0, 255);
+                buttonFood.GetComponent<Image>().color = clrYellow;
             }
             else
             {
                 print("white");
-                buttonFood.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                buttonFood.GetComponent<Image>().color = clrWhite;
             };
         }
         public void onClickTech()
@@ -164,12 +169,12 @@ namespace OpenCVForUnityExample
             if (detectTech)
             {
                 print("green");
-                buttonTech.GetComponent<Image>().color = new Color32(0, 255, 0, 255);
+                buttonTech.GetComponent<Image>().color = clrPurple;
             }
             else
             {
                 print("white");
-                buttonTech.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                buttonTech.GetComponent<Image>().color = clrWhite;
             };
         }
         public void onClickWeapons()
@@ -179,12 +184,12 @@ namespace OpenCVForUnityExample
             if (detectWeapons)
             {
                 print("green");
-                buttonWeapons.GetComponent<Image>().color = new Color32(0, 255, 0, 255);
+                buttonWeapons.GetComponent<Image>().color = clrRed;
             }
             else
             {
                 print("white");
-                buttonWeapons.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                buttonWeapons.GetComponent<Image>().color = clrWhite;
             };
         }
         public void onClickInfrastructure()
@@ -194,12 +199,12 @@ namespace OpenCVForUnityExample
             if (detectInfrastructure)
             {
                 print("green");
-                buttonInfra.GetComponent<Image>().color = new Color32(0, 255, 0, 255);
+                buttonInfra.GetComponent<Image>().color = clrAqua;
             }
             else
             {
                 print("white");
-                buttonInfra.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                buttonInfra.GetComponent<Image>().color = clrWhite;
             };
         }
         public void onClickFurniture()
@@ -214,7 +219,7 @@ namespace OpenCVForUnityExample
             else
             {
                 print("white");
-                buttonFurniture.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                buttonFurniture.GetComponent<Image>().color = clrWhite;
             };
         }
         public void onClickPersonalItems()
@@ -229,7 +234,7 @@ namespace OpenCVForUnityExample
             else
             {
                 print("white");
-                buttonPersonal.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+                buttonPersonal.GetComponent<Image>().color = clrWhite;
             };
         }
 
@@ -733,7 +738,12 @@ namespace OpenCVForUnityExample
         {
             Scalar clrGreen = new Scalar(43, 255, 89, 255);
             Scalar clrRed = new Scalar(255, 93, 76, 255);
-            Scalar clrBlue = new Scalar(40, 193, 224, 255);
+            Scalar clrBlue = new Scalar(0, 217, 255, 255);
+            Scalar clrOrange = new Scalar(255, 189, 89, 255);
+            Scalar clrYellow = new Scalar(255, 240, 42, 255);
+            Scalar clrPurple = new Scalar(193, 15, 255, 255);
+            Scalar clrAqua = new Scalar(0, 194, 203, 255);
+            Scalar clrWhite = new Scalar(255, 255, 255, 255);
             Scalar clrBlack = new Scalar(0, 0, 0, 255);
 
             int person = 0;
@@ -774,37 +784,37 @@ namespace OpenCVForUnityExample
             } else if (detectAnimals && animal.Contains(classId))
             {
                 // draw red box if so
-                drawBox(clrRed, classNames[classId] + " detected... conf: " + conf);
+                drawBox(clrBlue, classNames[classId] + " detected... conf: " + conf);
             }
             // check if found object is transportation method
             else if (detectTransport && transport.Contains(classId))
             {
                 // draw black box if so
-                drawBox(clrBlack, classNames[classId] + " detected... conf: " + conf);
+                drawBox(clrOrange, classNames[classId] + " detected... conf: " + conf);
             }
             // check if found object is food
             else if (detectFood && food.Contains(classId))
             {
                 // draw black box if so
-                drawBox(clrBlack, classNames[classId] + " detected... conf: " + conf);
+                drawBox(clrYellow, classNames[classId] + " detected... conf: " + conf);
             }
             // check if found object is technology
             else if (detectTech && tech.Contains(classId))
             {
                 // draw black box if so
-                drawBox(clrBlue, classNames[classId] + " detected... conf: " + conf);
+                drawBox(clrPurple, classNames[classId] + " detected... conf: " + conf);
             }
             // check if found object is a weapon
             else if (detectWeapons && weapons.Contains(classId))
             {
                 // draw black box if so
-                drawBox(clrBlack, classNames[classId] + " detected... conf: " + conf);
+                drawBox(clrRed, classNames[classId] + " detected... conf: " + conf);
             }
             // check if found object is public infrastructure
             else if (detectInfrastructure && infrastructure.Contains(classId))
             {
                 // draw black box if so
-                drawBox(clrBlack, classNames[classId] + " detected... conf: " + conf);
+                drawBox(clrAqua, classNames[classId] + " detected... conf: " + conf);
             }
             // check if found object is furniture
             else if (detectFurniture && furniture.Contains(classId))
