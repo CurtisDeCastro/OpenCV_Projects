@@ -18,9 +18,9 @@ public class RotateScript : MonoBehaviour
 
     }
 
-    public void Rotate()
-    {
-        print("ROTATING!!!");
-        this.transform.parent.parent.RotateAround(this.transform.parent.parent.position, new Vector3(1, 0, 0), speed * Time.deltaTime);
-    }
+    // public void Rotate()
+    // {
+    //     print("ROTATING!!!");
+    //     this.transform.parent.parent.RotateAround(this.transform.parent.parent.position, new Vector3(1, 0, 0), speed * Time.deltaTime);
+    // }
 }
